@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TruthShell</string>
+    <!-- Add other string resources here -->
+    <string name="landing_prompt">Ask away.\nTruth follows.</string>
+    <string name="capture_button">Capture</string>
+    <string name="record_button">Record</string>
+    <string name="type_button">Type</string>
+    <string name="typing_prompt">Got a claim?\nDrop it here.</string>
+    <string name="typing_hint">Type it in here.</string>
+    <string name="submit_button">Submit</string>
+    <string name="in_progress_message">Tuning into truth...</string>
+    <string name="sources_label">Sources</string>
+    <string name="save_button">Save</string>
+    <string name="share_button">Share</string>
+    <string name="back_button_description">Back</string>
+    <string name="error_resting">TruthShell is resting.\nTry again soon.</string>
+    <string name="logo_description">Shell Logo</string>
+</resources>
+

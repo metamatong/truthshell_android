@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palette from mockup -->
+    <color name="purple_200">#FFBB86FC</color> <!-- Placeholder, adjust based on actual mockup values -->
+    <color name="purple_500">#FF6200EE</color> <!-- Placeholder, adjust based on actual mockup values -->
+    <color name="purple_700">#FF3700B3</color> <!-- Placeholder, adjust based on actual mockup values -->
+    <color name="teal_200">#FF03DAC5</color> <!-- Placeholder, adjust based on actual mockup values -->
+    <color name="teal_700">#FF018786</color> <!-- Placeholder, adjust based on actual mockup values -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey_light">#FFF0F0F0</color> <!-- Placeholder for backgrounds -->
+    <color name="grey_dark">#FFCCCCCC</color> <!-- Placeholder for text/icons -->
+    <color name="shell_blue">#FFADD8E6</color> <!-- Placeholder for shell icon -->
+    <color name="shell_grey">#FFD3D3D3</color> <!-- Placeholder for resting shell icon -->
+</resources>
+

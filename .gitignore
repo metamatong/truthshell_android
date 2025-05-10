@@ -1,0 +1,21 @@
+# Gradle files
+.gradle/
+build/
+
+# Local config
+/local.properties
+/.idea/
+/*.iml
+
+# Kotlin/Java build outputs
+**/build/
+
+# Android Studio
+captures/
+.externalNativeBuild/
+
+# Signing keys
+*.jks
+
+# Misc
+*.log

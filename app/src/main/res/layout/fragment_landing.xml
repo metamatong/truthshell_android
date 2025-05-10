@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ui.landing.LandingFragment">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498">
+
+        <TextView
+            android:id="@+id/textViewPrompt"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/landing_prompt"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:fontFamily="@font/pretendard_medium" />
+
+        <ImageView
+            android:id="@+id/imageViewShell"
+            android:layout_width="240dp"
+            android:layout_height="306dp"
+            android:layout_marginTop="60dp"
+            android:scaleType="centerInside"
+            android:contentDescription="@string/logo_description"
+            android:src="@drawable/shell_main" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCapture"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/camera_button"
+            app:iconSize="80dp"
+            android:text="@string/capture_button"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"
+            android:contentDescription="@string/capture_button"
+            app:iconGravity="textTop"
+            android:drawablePadding="8dp"
+            app:iconTint="@null"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonRecord"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/record_button"
+            app:iconSize="80dp"
+            android:text="@string/record_button"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"
+            android:contentDescription="@string/record_button"
+            app:iconGravity="textTop"
+            android:drawablePadding="8dp"
+            app:iconTint="@null"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonType"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/type_button"
+            app:iconSize="80dp"
+            android:text="@string/type_button"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"
+            android:contentDescription="@string/type_button"
+            app:iconGravity="textTop"
+            android:drawablePadding="8dp"
+            app:iconTint="@null"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

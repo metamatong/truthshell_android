@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingFragment">
+
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.example.truthshellapp.ui.landing.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landingFragment_to_typingFragment"
+            app:destination="@id/typingFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_recordingFragment"
+            app:destination="@id/recordingFragment" />
+        <!-- Add action for camera placeholder -->
+        <action
+            android:id="@+id/action_landingFragment_to_cameraPlaceholderFragment"
+            app:destination="@id/cameraPlaceholderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/typingFragment"
+        android:name="com.example.truthshellapp.ui.typing.TypingFragment"
+        android:label="fragment_typing"
+        tools:layout="@layout/fragment_typing" >
+        <action
+            android:id="@+id/action_typingFragment_to_inProgressFragment"
+            app:destination="@id/inProgressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recordingFragment"
+        android:name="com.example.truthshellapp.ui.recording.RecordingFragment"
+        android:label="fragment_recording"
+        tools:layout="@layout/fragment_recording" >
+        <action
+            android:id="@+id/action_recordingFragment_to_inProgressFragment"
+            app:destination="@id/inProgressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inProgressFragment"
+        android:name="com.example.truthshellapp.ui.inprogress.InProgressFragment"
+        android:label="fragment_in_progress"
+        tools:layout="@layout/fragment_in_progress" >
+        <argument
+            android:name="claimText"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_inProgressFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+         <action
+            android:id="@+id/action_inProgressFragment_to_errorFragment"
+            app:destination="@id/errorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.example.truthshellapp.ui.results.ResultsFragment"
+        android:label="fragment_results"
+        tools:layout="@layout/fragment_results" >
+        <!-- Arguments for results data -->
+        <argument
+            android:name="originalClaim"
+            app:argType="string" />
+        <argument
+            android:name="confidenceScore"
+            app:argType="integer" />
+        <argument
+            android:name="confidenceLabel"
+            app:argType="string" />
+        <argument
+            android:name="sources"
+            app:argType="string[]" />
+        <action
+            android:id="@+id/action_resultsFragment_to_landingFragment"
+            app:destination="@id/landingFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.example.truthshellapp.ui.error.ErrorFragment"
+        android:label="fragment_error"
+        tools:layout="@layout/fragment_error" >
+         <action
+            android:id="@+id/action_errorFragment_to_landingFragment"
+            app:destination="@id/landingFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- Add Camera Placeholder Fragment -->
+    <fragment
+        android:id="@+id/cameraPlaceholderFragment"
+        android:name="com.example.truthshellapp.ui.camera.CameraPlaceholderFragment" 
+        android:label="fragment_camera_placeholder"
+        tools:layout="@layout/fragment_camera_placeholder" />
+
+</navigation>
+
