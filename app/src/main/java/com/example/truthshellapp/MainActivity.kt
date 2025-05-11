@@ -2,7 +2,8 @@ package com.example.truthshellapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.truthshellapp.databinding.ActivityMainBinding // Import ViewBinding class
+import androidx.navigation.findNavController
+import com.example.truthshellapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,11 +14,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        // Initial setup, perhaps show the landing fragment
-        if (savedInstanceState == null) {
-            // TODO: Add logic to display the initial fragment (e.g., LandingFragment)
-        }
     }
-}
 
+    override fun onSupportNavigateUp() =
+        findNavController(R.id.nav_host_fragment).navigateUp() || super.onSupportNavigateUp()
+
+}

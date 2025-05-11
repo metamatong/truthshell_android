@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.truthshellapp.data.model.SonarResponse
 import com.example.truthshellapp.data.repository.SonarRepository
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 // Define states for the API call process
 enum class ApiState {
