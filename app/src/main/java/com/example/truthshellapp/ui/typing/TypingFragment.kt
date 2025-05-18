@@ -32,9 +32,10 @@ class TypingFragment : Fragment() {
         binding.buttonSubmit.setOnClickListener {
             val claimText = binding.editTextClaim.text.toString().trim()
             if (claimText.isNotEmpty()) {
-                // TODO: Pass claimText to ViewModel or directly to next fragment
-                // For now, navigate to InProgress (later pass text as argument)
-                findNavController().navigate(R.id.action_typingFragment_to_inProgressFragment)
+                // pass the user’s text into the InProgressFragment
+                val action = TypingFragmentDirections
+                .actionTypingFragmentToInProgressFragment(claimText)
+                findNavController().navigate(action)
             } else {
                 Toast.makeText(requireContext(), "Please enter a claim", Toast.LENGTH_SHORT).show()
             }

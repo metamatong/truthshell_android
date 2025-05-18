@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.truthshellapp.R
 import com.example.truthshellapp.databinding.FragmentInProgressBinding
+import com.example.truthshellapp.BuildConfig
 
 class InProgressFragment : Fragment() {
 
@@ -34,8 +35,7 @@ class InProgressFragment : Fragment() {
 
         val claimText = args.claimText
 
-        // TODO: Replace "YOUR_API_KEY" with actual key retrieval logic (e.g., from BuildConfig)
-        val apiKey = "YOUR_API_KEY" 
+        val apiKey = BuildConfig.SERVER_API_KEY
 
         if (claimText.isNotEmpty()) {
             viewModel.checkClaimWithApi(apiKey, claimText)
