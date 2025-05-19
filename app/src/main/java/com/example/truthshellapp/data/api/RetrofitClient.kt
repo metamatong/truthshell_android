@@ -6,16 +6,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     // Replace with the actual base URL of the Perplexity Sonar API
-    private const val BASE_URL = "https://api.perplexity.ai/" // Placeholder URL
+    private const val BASE_URL = "https://truthshell-server-bmrt5o1v4-metamatons-projects.vercel.app/"
 
-    val instance: PerplexityApiService by lazy {
+    val instance: TruthShellApiService by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()) 
             // Add OkHttpClient here if custom configuration (e.g., logging interceptor) is needed
             .build()
 
-        retrofit.create(PerplexityApiService::class.java)
+        retrofit.create(TruthShellApiService::class.java)
     }
 }
 

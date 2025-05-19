@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 // Placeholder: Structure depends on actual Perplexity Sonar API
 // Based on the mockups provided
-data class SonarResponse(
+data class TruthResponse(
     @SerializedName("confidence_score")
     val confidenceScore: Int?, // e.g., 98
 

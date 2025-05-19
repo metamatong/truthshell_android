@@ -38,7 +38,7 @@ class InProgressFragment : Fragment() {
         val apiKey = BuildConfig.SERVER_API_KEY
 
         if (claimText.isNotEmpty()) {
-            viewModel.checkClaimWithApi(apiKey, claimText)
+            viewModel.analyzeTextWithApi(apiKey, claimText)
         } else {
             // Handle case where claim text is empty (should not happen ideally)
             Toast.makeText(requireContext(), "Error: No claim text provided", Toast.LENGTH_SHORT).show()
