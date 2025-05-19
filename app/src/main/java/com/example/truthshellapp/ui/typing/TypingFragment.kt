@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.truthshellapp.R
 import com.example.truthshellapp.databinding.FragmentTypingBinding
 
 class TypingFragment : Fragment() {
@@ -32,7 +31,6 @@ class TypingFragment : Fragment() {
         binding.buttonSubmit.setOnClickListener {
             val claimText = binding.editTextClaim.text.toString().trim()
             if (claimText.isNotEmpty()) {
-                // pass the user’s text into the InProgressFragment
                 val action = TypingFragmentDirections
                 .actionTypingFragmentToInProgressFragment(claimText)
                 findNavController().navigate(action)
