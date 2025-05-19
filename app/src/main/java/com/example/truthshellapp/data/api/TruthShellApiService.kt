@@ -13,7 +13,7 @@ import retrofit2.http.Part
 
 interface TruthShellApiService {
     /** JSON endpoint: send { "text": "…" } */
-    @POST("/analyze")
+    @POST("analyze")
     suspend fun analyzeText(
         @Header("X-API-KEY") apiKey: String,
         @Body request: TruthRequest
@@ -21,7 +21,7 @@ interface TruthShellApiService {
 
     /** Multipart endpoint: send form-data with mode + file */
     @Multipart
-    @POST("/analyze/file")
+    @POST("analyze/file")
     suspend fun analyzeFile(
         @Header("X-API-KEY") apiKey: String,
         @Part("mode") mode: RequestBody,
