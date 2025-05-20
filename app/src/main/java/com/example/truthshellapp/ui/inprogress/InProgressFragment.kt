@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.truthshellapp.R
 import com.example.truthshellapp.databinding.FragmentInProgressBinding
 import com.example.truthshellapp.BuildConfig
+import com.example.truthshellapp.ui.inprogress.InProgressFragmentDirections
 
 class InProgressFragment : Fragment() {
 
@@ -37,6 +38,8 @@ class InProgressFragment : Fragment() {
 
         val apiKey = BuildConfig.SERVER_API_KEY
 
+        // Observe API state changes before starting the request
+        observeViewModel()
         if (claimText.isNotEmpty()) {
             viewModel.analyzeTextWithApi(apiKey, claimText)
         } else {
@@ -44,8 +47,6 @@ class InProgressFragment : Fragment() {
             Toast.makeText(requireContext(), "Error: No claim text provided", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack() // Go back
         }
-
-        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -71,7 +72,8 @@ class InProgressFragment : Fragment() {
                     } else {
                         // Handle unexpected success state (missing data)
                         Toast.makeText(requireContext(), "API Success but data missing", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_inProgressFragment_to_errorFragment)
+                        val actionError = InProgressFragmentDirections.actionInProgressFragmentToErrorFragment()
+                        findNavController().navigate(actionError)
                     }
                 }
                 ApiState.ERROR -> {
@@ -79,7 +81,8 @@ class InProgressFragment : Fragment() {
                     val errorMessage = viewModel.errorMessage.value ?: "An unknown error occurred"
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                     // Navigate to Error Fragment
-                    findNavController().navigate(R.id.action_inProgressFragment_to_errorFragment)
+                    val actionError = InProgressFragmentDirections.actionInProgressFragmentToErrorFragment()
+                    findNavController().navigate(actionError)
                 }
                 null -> { /* Initial state, do nothing */ }
             }

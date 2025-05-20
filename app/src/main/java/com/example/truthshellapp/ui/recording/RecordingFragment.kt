@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.truthshellapp.R
 import com.example.truthshellapp.databinding.FragmentRecordingBinding
 import java.util.Locale
+import com.example.truthshellapp.ui.recording.RecordingFragmentDirections
 
 class RecordingFragment : Fragment(), RecognitionListener {
 
@@ -149,9 +150,10 @@ class RecordingFragment : Fragment(), RecognitionListener {
         if (!matches.isNullOrEmpty()) {
             val recognizedText = matches[0]
             Log.d("RecordingFragment", "Recognized: $recognizedText")
-            // TODO: Pass recognizedText to ViewModel or directly to next fragment
-            // For now, navigate to InProgress (later pass text as argument)
-            findNavController().navigate(R.id.action_recordingFragment_to_inProgressFragment)
+            // Navigate to InProgressFragment with the recognized text for analysis
+            val action = RecordingFragmentDirections
+                .actionRecordingFragmentToInProgressFragment(recognizedText)
+            findNavController().navigate(action)
         } else {
             Log.d("RecordingFragment", "No recognition results")
             Toast.makeText(requireContext(), "Could not recognize speech", Toast.LENGTH_SHORT).show()

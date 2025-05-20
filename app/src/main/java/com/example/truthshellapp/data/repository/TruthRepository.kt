@@ -3,6 +3,7 @@ package com.example.truthshellapp.data.repository
 import android.util.Log
 import com.example.truthshellapp.data.api.RetrofitClient
 import com.example.truthshellapp.data.api.TruthShellApiService
+import com.example.truthshellapp.data.model.TextPayload
 import com.example.truthshellapp.data.model.TruthRequest
 import com.example.truthshellapp.data.model.TruthResponse
 import okhttp3.MediaType.Companion.toMediaType
