@@ -55,10 +55,14 @@
             android:name="audioUri"
             app:argType="string"
             android:defaultValue="" />
+        <argument
+            android:name="imageUri"
+            app:argType="string"
+            android:defaultValue="" />
         <action
             android:id="@+id/action_inProgressFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
-         <action
+        <action
             android:id="@+id/action_inProgressFragment_to_errorFragment"
             app:destination="@id/errorFragment" />
     </fragment>
@@ -100,12 +104,16 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-    <!-- Add Camera Placeholder Fragment -->
+    <!-- Camera Placeholder Fragment with image capture -->
     <fragment
         android:id="@+id/cameraPlaceholderFragment"
-        android:name="com.example.truthshellapp.ui.camera.CameraPlaceholderFragment" 
+        android:name="com.example.truthshellapp.ui.camera.CameraPlaceholderFragment"
         android:label="fragment_camera_placeholder"
-        tools:layout="@layout/fragment_camera_placeholder" />
+        tools:layout="@layout/fragment_camera_placeholder" >
+        <action
+            android:id="@+id/action_cameraPlaceholderFragment_to_inProgressFragment"
+            app:destination="@id/inProgressFragment" />
+    </fragment>
 
 </navigation>
 

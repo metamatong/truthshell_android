@@ -43,7 +43,13 @@ class InProgressFragment : Fragment() {
 
         // Observe API state changes before starting the request
         observeViewModel()
-        if (args.audioUri.isNotEmpty()) {
+        if (args.imageUri.isNotEmpty()) {
+            // Analyze captured image file
+            val imageFile = File(Uri.parse(args.imageUri).path ?: "")
+            val requestFile = imageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("file", imageFile.name, requestFile)
+            viewModel.analyzeFileWithApi(apiKey, "image", filePart)
+        } else if (args.audioUri.isNotEmpty()) {
             // Analyze recorded audio file
             val audioFile = File(Uri.parse(args.audioUri).path ?: "")
             val requestFile = audioFile.asRequestBody("audio/mp4".toMediaTypeOrNull())

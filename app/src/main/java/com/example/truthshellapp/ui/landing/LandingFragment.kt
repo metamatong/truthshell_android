@@ -27,8 +27,9 @@ class LandingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonCapture.setOnClickListener {
-            // TODO: Implement Camera/Image capture placeholder logic
-            // For now, maybe navigate to an unimplemented screen or show a toast
+            findNavController().navigate(
+                R.id.action_landingFragment_to_cameraPlaceholderFragment
+            )
         }
 
         binding.buttonRecord.setOnClickListener {

@@ -34,7 +34,8 @@ class TypingFragment : Fragment() {
                 val action = TypingFragmentDirections
                     .actionTypingFragmentToInProgressFragment(
                         claimText = claimText,
-                        audioUri  = ""
+                        audioUri  = "",
+                        imageUri  = ""
                     )
                 findNavController().navigate(action)
             } else {
