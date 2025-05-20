@@ -17,5 +17,6 @@
     <string name="back_button_description">Back</string>
     <string name="error_resting">TruthShell is resting.\nTry again soon.</string>
     <string name="logo_description">Shell Logo</string>
+    <string name="saved_results_title">Saved Results</string>
 </resources>
 

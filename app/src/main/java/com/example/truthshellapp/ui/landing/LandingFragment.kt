@@ -39,6 +39,9 @@ class LandingFragment : Fragment() {
         binding.buttonType.setOnClickListener {
             findNavController().navigate(R.id.action_landingFragment_to_typingFragment)
         }
+        binding.buttonSaved.setOnClickListener {
+            findNavController().navigate(R.id.action_landingFragment_to_savedResultsFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -113,6 +113,19 @@
             android:drawablePadding="8dp"
             app:iconTint="@null"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSaved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_margin="8dp"
+            android:backgroundTint="@android:color/white"
+            app:cornerRadius="16dp"
+            android:text="@string/saved_results_title"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_semibold"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

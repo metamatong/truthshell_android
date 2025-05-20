@@ -25,6 +25,11 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import androidx.camera.core.Camera
+import androidx.camera.core.FlashMode
+import android.util.Size
 
 class CameraPlaceholderFragment : Fragment() {
 
@@ -34,10 +39,15 @@ class CameraPlaceholderFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+    private var lensFacing = CameraSelector.LENS_FACING_BACK
+    private var flashMode = ImageCapture.FLASH_MODE_OFF
+    private var camera: Camera? = null
+    private lateinit var scaleGestureDetector: ScaleGestureDetector
 
     companion object {
         private const val TAG = "CameraPlaceholder"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        private const val MAX_PHOTO_SIZE_BYTES = 5L * 1024 * 1024
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -67,6 +77,42 @@ class CameraPlaceholderFragment : Fragment() {
             ?: requireContext().filesDir
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+        scaleGestureDetector = ScaleGestureDetector(requireContext(),
+            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                override fun onScale(detector: ScaleGestureDetector): Boolean {
+                    val currentZoom = camera?.cameraInfo?.zoomState?.value?.zoomRatio ?: 1f
+                    camera?.cameraControl?.setZoomRatio(currentZoom * detector.scaleFactor)
+                    return true
+                }
+            })
+        binding.previewView.setOnTouchListener { _, event ->
+            scaleGestureDetector.onTouchEvent(event)
+            true
+        }
+
+        binding.buttonFlashToggle.setOnClickListener {
+            flashMode = when (flashMode) {
+                FlashMode.OFF -> FlashMode.ON
+                FlashMode.ON -> FlashMode.AUTO
+                else -> FlashMode.OFF
+            }
+            imageCapture?.flashMode = flashMode
+            binding.buttonFlashToggle.text = "Flash: ${'$'}{flashMode.name}"
+        }
+
+        binding.buttonToggleGrid.setOnClickListener {
+            binding.gridOverlay.apply {
+                visibility = if (visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            }
+        }
+
+        binding.buttonSwitchCamera.setOnClickListener {
+            lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK)
+                CameraSelector.LENS_FACING_FRONT
+            else CameraSelector.LENS_FACING_BACK
+            startCamera()
+        }
+
         binding.buttonTakePicture.setOnClickListener { takePhoto() }
         checkAndRequestPermission()
     }
@@ -90,12 +136,20 @@ class CameraPlaceholderFragment : Fragment() {
             val preview = Preview.Builder().build().also {
                 it.setSurfaceProvider(binding.previewView.surfaceProvider)
             }
-            imageCapture = ImageCapture.Builder().build()
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            imageCapture = ImageCapture.Builder()
+                .setFlashMode(flashMode)
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .setJpegQuality(85)
+                .setTargetResolution(Size(1280, 720))
+                .setTargetRotation(binding.previewView.display.rotation)
+                .build()
+            val selector = CameraSelector.Builder()
+                .requireLensFacing(lensFacing)
+                .build()
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    viewLifecycleOwner, cameraSelector, preview, imageCapture
+                camera = cameraProvider.bindToLifecycle(
+                    viewLifecycleOwner, selector, preview, imageCapture
                 )
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
@@ -120,6 +174,15 @@ class CameraPlaceholderFragment : Fragment() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    if (photoFile.length() > MAX_PHOTO_SIZE_BYTES) {
+                        photoFile.delete()
+                        Toast.makeText(
+                            requireContext(),
+                            "Image too large (>5MB), please retake",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        return
+                    }
                     val savedUri = Uri.fromFile(photoFile)
                     val action = CameraPlaceholderFragmentDirections
                         .actionCameraPlaceholderFragmentToInProgressFragment(

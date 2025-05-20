@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import com.example.truthshellapp.data.local.SavedResultEntity
+import com.example.truthshellapp.data.local.AppDatabase
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -59,8 +63,17 @@ class ResultsFragment : Fragment() {
         }
 
         binding.buttonSave.setOnClickListener {
-            // TODO: Implement save functionality (e.g., save to local DB or file)
-            Toast.makeText(requireContext(), "Save feature not implemented", Toast.LENGTH_SHORT).show()
+            val resultEntity = SavedResultEntity(
+                originalClaim = args.originalClaim,
+                confidenceScore = args.confidenceScore,
+                confidenceLabel = args.confidenceLabel,
+                sources = args.sources.toList(),
+                timestamp = System.currentTimeMillis()
+            )
+            lifecycleScope.launch {
+                AppDatabase.getInstance(requireContext()).savedResultDao().insert(resultEntity)
+                Toast.makeText(requireContext(), "Result saved", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.buttonShare.setOnClickListener {

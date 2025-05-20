@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_landingFragment_to_cameraPlaceholderFragment"
             app:destination="@id/cameraPlaceholderFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_savedResultsFragment"
+            app:destination="@id/savedResultsFragment" />
     </fragment>
 
     <fragment
@@ -113,6 +116,18 @@
         <action
             android:id="@+id/action_cameraPlaceholderFragment_to_inProgressFragment"
             app:destination="@id/inProgressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/savedResultsFragment"
+        android:name="com.example.truthshellapp.ui.saved.SavedResultsFragment"
+        android:label="fragment_saved_results"
+        tools:layout="@layout/fragment_saved_results" >
+        <action
+            android:id="@+id/action_savedResultsFragment_to_landingFragment"
+            app:destination="@id/landingFragment"
+            app:popUpTo="@id/landingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

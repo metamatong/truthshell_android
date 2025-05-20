@@ -11,6 +11,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <!-- Grid overlay to assist composition -->
+    <com.example.truthshellapp.ui.camera.GridOverlayView
+        android:id="@+id/gridOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Controls: flash toggle, grid overlay toggle, camera switch -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonFlashToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flash: OFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonToggleGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grid"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonFlashToggle"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSwitchCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flip"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonTakePicture"
         android:layout_width="wrap_content"
