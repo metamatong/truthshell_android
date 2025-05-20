@@ -9,6 +9,8 @@
     <string name="typing_hint">Type it in here.</string>
     <string name="submit_button">Submit</string>
     <string name="in_progress_message">Tuning into truth...</string>
+    <string name="recording_status_listening">Recording... Speak now.</string>
+    <string name="recording_status_processing">Processing...</string>
     <string name="sources_label">Sources</string>
     <string name="save_button">Save</string>
     <string name="share_button">Share</string>

@@ -8,6 +8,8 @@ import com.example.truthshellapp.data.model.TruthResponse
 import com.example.truthshellapp.data.repository.TruthRepository
 import kotlinx.coroutines.launch
 
+import okhttp3.MultipartBody
+
 // Define states for the API call process
 enum class ApiState {
     LOADING,
@@ -43,6 +45,26 @@ class InProgressViewModel(private val repository: TruthRepository = TruthReposit
                 }
             } catch (e: Exception) {
                 // Handle network or other exceptions
+                _errorMessage.value = "Network Error: ${e.message}"
+                _apiState.value = ApiState.ERROR
+            }
+        }
+    }
+    /** Call the multipart /analyze/file endpoint (e.g., audio or image) */
+    fun analyzeFileWithApi(apiKey: String, mode: String, filePart: MultipartBody.Part) {
+        _apiState.value = ApiState.LOADING
+        viewModelScope.launch {
+            try {
+                val response = repository.analyzeFile(apiKey, mode, filePart)
+                if (response.isSuccessful) {
+                    _sonarResult.value = response.body()
+                    _apiState.value = ApiState.SUCCESS
+                } else {
+                    val errorBody = response.errorBody()?.string() ?: "Unknown API error"
+                    _errorMessage.value = "API Error (${response.code()}): $errorBody"
+                    _apiState.value = ApiState.ERROR
+                }
+            } catch (e: Exception) {
                 _errorMessage.value = "Network Error: ${e.message}"
                 _apiState.value = ApiState.ERROR
             }

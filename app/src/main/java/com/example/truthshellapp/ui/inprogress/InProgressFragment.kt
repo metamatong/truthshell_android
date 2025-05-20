@@ -13,6 +13,11 @@ import com.example.truthshellapp.R
 import com.example.truthshellapp.databinding.FragmentInProgressBinding
 import com.example.truthshellapp.BuildConfig
 import com.example.truthshellapp.ui.inprogress.InProgressFragmentDirections
+import android.net.Uri
+import java.io.File
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 class InProgressFragment : Fragment() {
 
@@ -34,18 +39,22 @@ class InProgressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val claimText = args.claimText
-
         val apiKey = BuildConfig.SERVER_API_KEY
 
         // Observe API state changes before starting the request
         observeViewModel()
-        if (claimText.isNotEmpty()) {
-            viewModel.analyzeTextWithApi(apiKey, claimText)
+        if (args.audioUri.isNotEmpty()) {
+            // Analyze recorded audio file
+            val audioFile = File(Uri.parse(args.audioUri).path ?: "")
+            val requestFile = audioFile.asRequestBody("audio/mp4".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("file", audioFile.name, requestFile)
+            viewModel.analyzeFileWithApi(apiKey, "audio", filePart)
+        } else if (args.claimText.isNotEmpty()) {
+            // Analyze typed claim
+            viewModel.analyzeTextWithApi(apiKey, args.claimText)
         } else {
-            // Handle case where claim text is empty (should not happen ideally)
-            Toast.makeText(requireContext(), "Error: No claim text provided", Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack() // Go back
+            Toast.makeText(requireContext(), "Error: No input provided", Toast.LENGTH_SHORT).show()
+            findNavController().popBackStack()
         }
     }
 

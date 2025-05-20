@@ -49,7 +49,12 @@
         tools:layout="@layout/fragment_in_progress" >
         <argument
             android:name="claimText"
-            app:argType="string" />
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="audioUri"
+            app:argType="string"
+            android:defaultValue="" />
         <action
             android:id="@+id/action_inProgressFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
