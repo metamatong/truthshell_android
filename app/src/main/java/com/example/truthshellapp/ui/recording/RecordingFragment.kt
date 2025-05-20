@@ -99,8 +99,12 @@ class RecordingFragment : Fragment() {
         }
         mediaRecorder = null
 
-        val action = RecordingFragmentDirections.actionRecordingFragmentToInProgressFragment("")
-        action.audioUri = audioFilePath
+        val action = RecordingFragmentDirections
+            .actionRecordingFragmentToInProgressFragment(
+                claimText = "",
+                audioUri  = audioFilePath
+            )
+
         findNavController().navigate(action)
     }
 

@@ -32,7 +32,10 @@ class TypingFragment : Fragment() {
             val claimText = binding.editTextClaim.text.toString().trim()
             if (claimText.isNotEmpty()) {
                 val action = TypingFragmentDirections
-                .actionTypingFragmentToInProgressFragment(claimText)
+                    .actionTypingFragmentToInProgressFragment(
+                        claimText = claimText,
+                        audioUri  = ""
+                    )
                 findNavController().navigate(action)
             } else {
                 Toast.makeText(requireContext(), "Please enter a claim", Toast.LENGTH_SHORT).show()
